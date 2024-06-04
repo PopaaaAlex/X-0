@@ -36,22 +36,24 @@ void citire(int **tabla, int *linie, int *coloana, int n)//Functia ce citeste po
 int verif_coloana(int **tabla, int y)
 {
     int i, j;
-    for( i = 0; i < 3; i++)
+    for( i = 0; i < 2; i++){
         for(j = i + 1; j < 3; j++)
-        if((tabla[i][y - 1] != tabla[j ][y - 1]) || (tabla[i][y - 1] == 0))  
-                return 0;              
-                else return 1;    
+            if((tabla[i][y - 1] != tabla[j ][y - 1]) || (tabla[i][y - 1] == 0))  
+                return 0; 
+        }             
+     return 1;    
 }
 
 int verif_linie(int **tabla, int x)
 {
     int j, i;
-    for(j = 0; j < 3; j++)
+    for(j = 0; j < 2; j++)
+    {
         for(i = j + 1; i <3; i++)
-
-        if((tabla[x - 1][j] != tabla[x - 1][i]) || (tabla[x - 1][j] == 0))
-                return 0;    
-                else return 1;
+            if(tabla[x - 1][j] != tabla[x - 1][i] || tabla[x - 1][j] == 0)
+                return 0; 
+    }   
+    return 1;
             
 }
 
@@ -75,14 +77,15 @@ int verif_diag_s(int **tabla)
 {
     int i, j, diag_s = 1;
 
-    for(i = 0; i < 3; i++)
+    for(i = 0; i < 2; i++)
+    {
         for( int j = i + 1; j < 3; j++)
-            if(tabla[i][2 - i] == tabla[j][2 - j] || (tabla[i][2 - i] != 0))
+            if(tabla[i][2 - i] != tabla[j][2 - j] || (tabla[i][2 - i] == 0))
             {
                 diag_s=0;
                 break;
             }
-        
+    }
     return diag_s;
 }
 
@@ -101,6 +104,7 @@ void input(int **tabla, int *linie, int *coloana, int *diag, int *diag_s)
                     printf("Al doilea jucator: ");
                     citire(tabla, linie, coloana, n);
                 }
+        tabela(tabla);
         *diag = verif_diag_p(tabla);
         *diag_s = verif_diag_s(tabla);
         if (*linie == 1 || *coloana == 1 || *diag == 1 || *diag_s == 1) {
@@ -117,19 +121,47 @@ void castigator(int **tabla,int *linie, int *coloana,int *diag, int *diag_s)
     for(i = 0; i < 3; i++)
         for(j = 0; j < 3; j++)
             {
-                *linie = verif_linie(tabla, i);
-                *coloana = verif_coloana(tabla, j);
+                *linie = verif_linie(tabla, i+1);
+                *coloana = verif_coloana(tabla, j+1);
                 *diag = verif_diag_p(tabla);
                 *diag_s = verif_diag_s(tabla);
                 if((*linie==1 || *coloana==1 || *diag==1|| *diag_s==1) && (tabla[i][j] == 1))
                     {
                         printf("jucatorul 1 a castigat.\n");
-                        break;
+                        exit(1);
+                        
                     }
-                    else if((*linie==1 || *coloana==1 || *diag==1 || *diag_s==1 ) && (tabla[i][j] == 1))
+                    else if((*linie==1 || *coloana==1 || *diag==1 || *diag_s==1 ) && (tabla[i][j] == 2))
                         {
                             printf("jucatorul 2 a castigat.\n");
-                            break;
+                            exit(1);
+                            
                         }
             }   
+}
+
+void tabela(int **tabla) 
+    {
+    //system("clear");
+    for(int i = 0; i < 3; i++) 
+        {
+            for(int j = 0; j < 3; j++) 
+            {
+                if(tabla[i][j] == 0)
+                    printf(" ");
+                else if(tabla[i][j] == 1)
+                    printf("X");
+                else if(tabla[i][j] == 2)
+                    printf("0");
+
+                if(j < 2)
+                    printf(" |");
+            }
+        printf("\n");
+        if(i < 2) {
+            for(int m = 0; m < 8; m++)
+                printf("-");
+            printf("\n");
+        }
+    }
 }

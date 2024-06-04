@@ -13,5 +13,6 @@ int verif_diag_s(int **tabla);
 void citire(int **tabla, int *linie, int *coloana, int );
 void input(int **tabla, int *linie, int *coloana, int *diag, int *diag_s);
 void castigator(int **tabla, int *linie, int *coloana, int *diag, int *diag_s);
+void tabela(int **tabla);
 
 #endif
