@@ -20,7 +20,7 @@ The X-O Game (also known as Tic-Tac-Toe) is a classic two-player game where play
         In bash <br>
     git clone https://github.com/PopaaaAlex/X-0.git 
 
-2.Navigate into the project directory:<br>
+2. Navigate into the project directory:<br>
     cd X-0
 
 3. Use the Makefile to compile the program:<br>
