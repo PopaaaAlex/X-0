@@ -5,7 +5,6 @@
 #include <stdlib.h>
 
 void alocare_si_initializare(int ***tabla);
-int verificare_liber(int **tabla, int x, int y);
 int verif_coloana(int **tabla,int y);
 int verif_linie(int **tabla, int x);
 int verif_diag_p(int **tabla);
